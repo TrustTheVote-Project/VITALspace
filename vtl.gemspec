@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "nokogiri"
   s.add_dependency "timeliness"
+  s.add_dependency "hashie"
 
   s.add_development_dependency "guard"
   s.add_development_dependency "guard-minitest"

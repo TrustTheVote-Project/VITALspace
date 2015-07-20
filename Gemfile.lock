@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     vtl (1.0.0)
+      hashie
       nokogiri
       timeliness
 
@@ -26,6 +27,7 @@ GEM
     guard-minitest (2.4.4)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    hashie (3.4.2)
     hitimes (1.2.2)
     listen (2.10.0)
       celluloid (~> 0.16.0)

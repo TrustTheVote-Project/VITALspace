@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<voterTransactionLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.electiongeek.org/schema/vtl_schema_v4_4.xsd" schemaVersion="4.4">
-  <header>
-    <hashAlg>SHA1</hashAlg>
-    <createDate>2014-07-21T08:54:03.690</createDate>
-  </header>
-</voterTransactionLog>

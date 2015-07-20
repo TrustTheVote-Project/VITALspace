@@ -4,15 +4,26 @@ Parser for the VTL XML format conforming to XSD 4.4.
 
 ## Usage
 
-    vtl = VTL.parse(xml_string)
+    class Handler
+      def parsed_header(header)
+        # header.filename
+        # header.origin
+        # header.origin_uniq
+        # header.create_date
+        # header.hash_alg
+      end
 
-Returns the `VTL::VoterTransactionLog` object that you can use to access data.
+      def parsed_record(record)
+        # record.voter_id ...
+      end
 
-    origin
-    origin_uniq
-    hash_alg
-    create_date
-    records           # => [ VTL::VoterTransactionRecord, ... ]
+      def error(invalid_record)
+        # invalid_record.errors
+      end
+    end
+
+    handler = Handler.new
+    VTL.parse_file(file, handler)
 
 Each record has validated set of fields:
 

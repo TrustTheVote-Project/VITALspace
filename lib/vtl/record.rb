@@ -1,4 +1,8 @@
-class VTL::VoterTransactionRecord < VTL::Base
+require 'hashie'
+
+class VTL::Record < Hashie::Mash
+
+  include Hashie::Extensions::Coercion
 
   ACTION_VALUES    = %w( identify voterPollCheckin cancelVoterRecord start discard complete submit receive approve reject sentToVoter returnedUndelivered ).map(&:downcase)
   FORM_VALUES      = %w( VoterRegistration VoterRegistrationAbsenteeRequest VoterRecordUpdate VoterRecordUpdateAbsenteeRequest AbsenteeRequest AbsenteeBallot ProvisionalBallot PollBookEntry VoterCard ).map(&:downcase)
@@ -11,28 +15,50 @@ class VTL::VoterTransactionRecord < VTL::Base
     postalSent emailSent electronicSent faxSent
     onlineVoterReg onlineBalloting ).map(&:downcase)
 
-  attr_accessor :voter_id
-  attr_accessor :date
-  attr_accessor :action
-  attr_accessor :form
-  attr_accessor :form_note
-  attr_accessor :jurisdiction
-  attr_accessor :leo
-  attr_accessor :notes
-  attr_accessor :comment
-  attr_accessor :election
+  ATTRS = {
+    'voterid'      => 'voter_id',
+    'date'         => 'date',
+    'action'       => 'action',
+    'form'         => 'form',
+    'formNote'     => 'formNote',
+    'leo'          => 'leo',
+    'notes'        => 'notes',
+    'comment'      => 'comment',
+    'election'     => 'election',
+    'jurisdiction' => 'jurisdiction' }
 
-  def load_from_node(node)
-    @voter_id     = required(node, 'voterid')
-    @date         = Timeliness.parse(required(node, 'date'))
-    @action       = among('action', required(node, 'action'), ACTION_VALUES)
-    @jurisdiction = required(node, 'jurisdiction')
-    @form         = among('form', optional(node, 'form'), FORM_VALUES)
-    @form_note    = among('formNote', optional(node, 'formNote'), FORM_NOTE_VALUES)
-    @leo          = optional(node, 'leo')
-    @notes        = among('notes', optional(node, 'notes'), NOTES_VALUES)
-    @comment      = optional(node, 'comment')
-    @election     = optional(node, 'election')
+  def errors
+    if !defined? @errors
+      @errors = []
+      requried %w( voterid date jurisdiction action )
+      valid :action, ACTION_VALUES
+      valid :form, FORM_VALUES
+      valid :form_note, FORM_NOTE_VALUES
+      valid :notes, NOTES_VALUES
+    end
+
+    @errors
   end
-end
 
+  def valid?
+    errors.empty?
+  end
+
+  private
+
+  def required(*fields)
+    fields.each do |f|
+      @errors << "#{f} is required" if blank?(self.send(f))
+    end
+  end
+
+  def valid(field, values)
+    v = self.send(field)
+    @errors << "#{field} is invalid" if !v.nil? and !values.include?(v.downcase)
+  end
+
+  def blank?(f)
+    f.nil? or f.empty?
+  end
+
+end
