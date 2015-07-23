@@ -1,16 +1,13 @@
 require 'vtl/record'
 require 'vtl/header'
 
-class VTL::Parser
+class VTL::Parser < Nokogiri::XML::SAX::Document
 
   def initialize(filename, handler)
     @filename = filename
     @handler  = handler
     @header   = VTL::Header.new
     @record   = VTL::Record.new
-  end
-
-  def xmldecl(version, encoding, standalone)
   end
 
   def start_document
@@ -36,12 +33,6 @@ class VTL::Parser
     end
   end
 
-  def start_element(name, attrs)
-  end
-
-  def end_element(name)
-  end
-
   def end_element_namespace(name, prefix = nil, uri = nil)
     @attr_name = nil
     case name
@@ -65,13 +56,8 @@ class VTL::Parser
     @dest[@attr_name] = text.strip unless @attr_name.nil?
   end
 
-  def end_document
-  end
-
   def error(msg)
     @handler.xml_error(msg)
   end
 
-  def comment(str)
-  end
 end
