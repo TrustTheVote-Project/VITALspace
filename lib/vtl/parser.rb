@@ -71,4 +71,7 @@ class VTL::Parser
   def error(msg)
     @handler.xml_error(msg)
   end
+
+  def comment(str)
+  end
 end
