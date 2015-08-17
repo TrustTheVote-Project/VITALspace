@@ -16,16 +16,17 @@ class VTL::Record < Hashie::Mash
     onlineVoterReg onlineBalloting ).map(&:downcase)
 
   ATTRS = {
-    'voterid'      => 'voter_id',
-    'date'         => 'date',
-    'action'       => 'action',
-    'form'         => 'form',
-    'formNote'     => 'formNote',
-    'leo'          => 'leo',
-    'notes'        => 'notes',
-    'comment'      => 'comment',
-    'election'     => 'election',
-    'jurisdiction' => 'jurisdiction' }
+    'voterid'      => { name: 'voter_id' },
+    'date'         => { name: 'date' },
+    'action'       => { name: 'action' },
+    'form'         => { name: 'form' },
+    'formNote'     => { name: 'formNote' },
+    'leo'          => { name: 'leo' },
+    'notes'        => { name: 'notes', type: :array },
+    'comment'      => { name: 'comment' },
+    'election'     => { name: 'election' },
+    'jurisdiction' => { name: 'jurisdiction' }
+  }
 
   def errors
     if !defined? @errors

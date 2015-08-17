@@ -29,7 +29,7 @@ class VTL::Parser < Nokogiri::XML::SAX::Document
       @attr_name = nil
       @attr_map  = VTL::Record::ATTRS
     else
-      @attr_name = @attr_map && @attr_map[name]
+      @attr_name = name
     end
   end
 
@@ -53,7 +53,21 @@ class VTL::Parser < Nokogiri::XML::SAX::Document
   end
 
   def characters(text)
-    @dest[@attr_name] = text.strip unless @attr_name.nil?
+    return if @attr_map.nil?
+
+    attr = @attr_map[@attr_name]
+
+    unless attr.nil?
+      name = attr[:name]
+      type = attr[:type] || :text
+      val  = text.strip
+
+      if type == :array
+        @dest[name] = (@dest[name] || []) + [ val ]
+      else
+        @dest[name] = val
+      end
+    end
   end
 
   def error(msg)

@@ -5,9 +5,9 @@ class VTL::Header < Hashie::Mash
   include Hashie::Extensions::Coercion
 
   ATTRS = {
-    'origin'     => 'origin',
-    'originUniq' => 'origin_uniq',
-    'createDate' => 'create_date',
-    'hashAlg'    => 'hash_alg' }
+    'origin'     => { name: 'origin' },
+    'originUniq' => { name: 'origin_uniq' },
+    'createDate' => { name: 'create_date' },
+    'hashAlg'    => { name: 'hash_alg' } }
 
 end

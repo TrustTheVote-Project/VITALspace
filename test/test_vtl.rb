@@ -32,7 +32,7 @@ class VTLTest < Minitest::Test
 
   def test_parse_url
     handler = Handler.new
-    VTL.parse_uri('https://raw.githubusercontent.com/TrustTheVote-Project/vtl/master/test/fixtures/log-full.xml', handler)
+    VTL.parse_uri('https://raw.githubusercontent.com/TrustTheVote-Project/vtl/master/test/fixtures/log-full.xml?a', handler)
     assert_handler(handler)
   end
 
@@ -61,7 +61,7 @@ class VTLTest < Minitest::Test
     assert_equal "approve", r.action
     assert_equal "VoterRecordUpdate", r.form
     assert_equal "ROANOKE CITY", r.jurisdiction
-    assert_equal "acceptNewRequest", r.notes
+    assert_equal [ "acceptNewRequest", "postalSent" ], r.notes
   end
 
 end
