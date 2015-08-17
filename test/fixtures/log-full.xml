@@ -20,5 +20,6 @@
     <form>VoterRecordUpdate</form>
     <jurisdiction>ROANOKE CITY</jurisdiction>
     <notes>acceptNewRequest</notes>
+    <notes>postalSent</notes>
   </voterTransactionRecord>
 </voterTransactionLog>
