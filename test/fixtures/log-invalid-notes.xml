@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<voterTransactionLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.electiongeek.org/schema/vtl_schema_v4_4.xsd" schemaVersion="4.4">
+  <header>
+    <origin>Sample Virginia Data</origin>
+    <originUniq>B6BF0C25-BDEA-440B-BDAF-F484D01FA90D</originUniq>
+    <hashAlg>SHA1</hashAlg>
+    <createDate>2014-07-21T08:54:03.690</createDate>
+  </header>
+  <voterTransactionRecord>
+    <voterid>ACLyxNKFJvmidhT0E7KttaM07lk=</voterid>
+    <date>2014-07-11T11:46:38.777-04:00</date>
+    <action>approve</action>
+    <form>VoterRecordUpdate</form>
+    <jurisdiction>PRINCE GEORGE COUNTY</jurisdiction>
+  </voterTransactionRecord>
+  <voterTransactionRecord>
+    <voterid>AL/K6aDqL+wD3akQv6QmnYP7TYg=</voterid>
+    <date>2014-07-11T09:45:02.087-04:00</date>
+    <action>approve</action>
+    <form>VoterRecordUpdate</form>
+    <jurisdiction>ROANOKE CITY</jurisdiction>
+    <notes>acceptNewRequest</notes>
+    <notes>postalSentt</notes>
+  </voterTransactionRecord>
+</voterTransactionLog>

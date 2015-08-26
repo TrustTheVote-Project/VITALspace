@@ -28,6 +28,10 @@ class VTL::Record < Hashie::Mash
     'jurisdiction' => { name: 'jurisdiction' }
   }
 
+  def clear
+    remove_instance_variable(:@errors) if defined? @errors
+  end
+
   def errors
     if !defined? @errors
       @errors = []
@@ -55,7 +59,16 @@ class VTL::Record < Hashie::Mash
 
   def valid(field, values)
     v = self.send(field)
-    @errors << "#{field} is invalid" if !v.nil? and !values.include?(v.downcase)
+
+    if !v.nil?
+      if v.is_a? Array
+        invalid = (v.map(&:downcase) - values).size > 0
+      else
+        invalid = !values.include?(v.downcase)
+      end
+
+      @errors << "#{field} is invalid" if invalid
+    end
   end
 
   def blank?(f)

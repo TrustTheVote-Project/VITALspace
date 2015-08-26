@@ -36,6 +36,15 @@ class VTLTest < Minitest::Test
     assert_handler(handler)
   end
 
+  def test_invalid_notes
+    handler = Handler.new
+    VTL.parse_file(File.dirname(__FILE__) + "/fixtures/log-invalid-notes.xml", handler)
+
+    r = handler.invalid_record
+    refute_nil r
+    assert_equal [ "notes is invalid" ], r.errors
+  end
+
   def assert_handler(handler)
     assert_nil handler.invalid_record
 
