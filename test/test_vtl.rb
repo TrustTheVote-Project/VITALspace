@@ -22,6 +22,10 @@ class VTLTest < Minitest::Test
     def error(invalid_record)
       @invalid_record = invalid_record
     end
+
+    def xml_error(e)
+      raise e
+    end
   end
 
   def test_parse_file

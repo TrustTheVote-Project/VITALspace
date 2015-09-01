@@ -3,6 +3,8 @@ require 'vtl/header'
 
 class VTL::Parser < Nokogiri::XML::SAX::Document
 
+  attr_writer :filename
+
   def initialize(filename, handler)
     @filename = filename
     @handler  = handler
